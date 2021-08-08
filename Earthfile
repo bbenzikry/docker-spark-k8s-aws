@@ -31,7 +31,7 @@ build-deps:
 
   ENV PATH=/opt/apache-maven-${maven_version}/bin:$PATH
   ENV MAVEN_HOME /opt/apache-maven-${maven_version}
-  ENV MAVEN_OPTS="-Xmx1024M -Xss128M -XX:MaxPermSize=1024M -XX:+CMSClassUnloadingEnabled"
+  ENV MAVEN_OPTS="-Xmx1024M -Xss128M -XX:+CMSClassUnloadingEnabled"
 
   # configure the pentaho nexus repo to prevent build errors
   # similar to the following: https://github.com/apache/hudi/issues/2479
@@ -50,14 +50,14 @@ build-glue-hive-client:
 # Patch copied from: https://issues.apache.org/jira/secure/attachment/12958418/HIVE-12679.branch-2.3.patch
   COPY ./aws-glue-spark-hive-client/HIVE-12679.branch-2.3.patch hive.patch
   RUN patch -p0 <hive.patch &&\
-    mvn clean install -DskipTests
+    mvn -e clean install -DskipTests
 
   # Now with hive patched and installed, build the glue client
   RUN git clone https://github.com/viaduct-ai/aws-glue-data-catalog-client-for-apache-hive-metastore /catalog
 
   WORKDIR /catalog
 
-  RUN mvn clean package \
+  RUN mvn -e clean package \
     -DskipTests \
     -Dhive2.version=${hive_version} \
     -Dhadoop.version=${hadoop_version} \
