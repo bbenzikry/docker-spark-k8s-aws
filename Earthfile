@@ -167,6 +167,9 @@ build-spark-image:
 
   ENV PATH "${PATH}:${SPARK_HOME}/bin"
 
+  # default pythonpath for pyspark
+  ENV PYTHONPATH ${SPARK_HOME}/python/lib/pyspark.zip:${SPARK_HOME}/python/lib/py4j-*.zip
+
   WORKDIR /opt/spark/work-dir
   ENTRYPOINT [ "/opt/entrypoint.sh" ]
 
