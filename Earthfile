@@ -49,7 +49,7 @@ build-glue-hive-client:
   WORKDIR /hive
 # Patch copied from: https://issues.apache.org/jira/secure/attachment/12958418/HIVE-12679.branch-2.3.patch
   COPY ./aws-glue-spark-hive-client/HIVE-12679.branch-2.3.patch hive.patch
-  RUN patch -p0 <hive.patch &&\
+  RUN patch -p0 <hive.patch &&\ 
     mvn -e clean install -DskipTests
 
   # Now with hive patched and installed, build the glue client
