@@ -31,6 +31,7 @@ build-deps:
 
   ENV PATH=/opt/apache-maven-${maven_version}/bin:$PATH
   ENV MAVEN_HOME /opt/apache-maven-${maven_version}
+  ENV MAVEN_OPTS="-Xmx1024M -Xss128M -XX:MaxPermSize=1024M -XX:+CMSClassUnloadingEnabled"
 
   # configure the pentaho nexus repo to prevent build errors
   # similar to the following: https://github.com/apache/hudi/issues/2479
