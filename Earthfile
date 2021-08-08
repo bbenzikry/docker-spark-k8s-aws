@@ -35,7 +35,7 @@ build-deps:
 
   # configure the pentaho nexus repo to prevent build errors
   # similar to the following: https://github.com/apache/hudi/issues/2479
-  COPY ./maven-settings.xml ${MAVEN_HOME}/conf/settings.xml
+  #COPY ./maven-settings.xml ${MAVEN_HOME}/conf/settings.xml
 
 build-glue-hive-client:
   FROM +build-deps
