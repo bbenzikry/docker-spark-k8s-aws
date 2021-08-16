@@ -174,8 +174,7 @@ build-spark-image:
   WORKDIR /opt/spark/work-dir
   ENTRYPOINT [ "/opt/entrypoint.sh" ]
 
-# Specify the User that the actual main process will run as
-  ARG spark_uid=185
+  # Specify the User that the actual main process will run as
   USER ${spark_uid}
 
   SAVE IMAGE --push ${container_repo}:${container_tag}
