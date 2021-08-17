@@ -1,5 +1,6 @@
 ARG spark_version=3.1.2
 ARG hadoop_version=3.3.0
+ARG hadoop_profile=3.2
 ARG hive_version=2.3.7
 ARG maven_version=3.6.3
 
@@ -72,6 +73,7 @@ build-spark:
   # Build spark
   WORKDIR /
 
+  # Note that hadoop profile is used here. hadoop profile can be different than the version itself.
   RUN git clone https://github.com/apache/spark.git --branch v${spark_version} --single-branch && \
       cd /spark && \
       ./dev/make-distribution.sh \
@@ -80,7 +82,7 @@ build-spark:
         -DskipTests \
         -Pkubernetes \
         -Phadoop-cloud \
-        -P"hadoop-${hadoop_version%.*}" \
+        -P"hadoop-${hadoop_profile}" \
         -Dhadoop.version="${hadoop_version}" \
         -Dhive.version="${hive_version}" \
         -Phive \
